@@ -1,6 +1,11 @@
 # Dockerfile - SUBTEL Drupal 10 en Kubernetes
 FROM drupal:10-apache
 
+# Instalar PostgreSQL PHP driver
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copiar el proyecto
 COPY subtel-drupal/ /var/www/html/
 
