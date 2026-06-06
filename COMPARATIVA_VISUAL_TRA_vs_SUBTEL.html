@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparativa TRA vs SUBTEL</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+    header {
+      background: white;
+      padding: 40px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    header h1 { color: #667eea; font-size: 36px; margin-bottom: 10px; }
+    header p { color: #666; font-size: 16px; }
+
+    .vs-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .side { background: white; border-radius: 8px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .side h2 { font-size: 24px; margin-bottom: 20px; border-bottom: 3px solid; padding-bottom: 10px; }
+
+    .tra h2 { color: #e74c3c; border-color: #e74c3c; }
+    .subtel h2 { color: #27ae60; border-color: #27ae60; }
+
+    .feature-row {
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .feature-name { font-weight: bold; flex: 1; }
+    .feature-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+
+    .status-no { background: #ffe0e0; color: #c92a2a; }
+    .status-yes { background: #d3f9d8; color: #2f9e44; }
+    .status-partial { background: #fff3bf; color: #e67700; }
+
+    .comparison-table {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      border-bottom: 1px solid #eee;
+      padding: 15px;
+      align-items: center;
+    }
+
+    .table-row:hover { background: #f9f9f9; }
+
+    .badge-tra { background: #ffe0e0; color: #c92a2a; padding: 4px 12px; border-radius: 4px; font-weight: bold; text-align: center; font-size: 12px; }
+    .badge-subtel { background: #d3f9d8; color: #2f9e44; padding: 4px 12px; border-radius: 4px; font-weight: bold; text-align: center; font-size: 12px; }
+    .badge-draw { background: #fff3bf; color: #e67700; padding: 4px 12px; border-radius: 4px; font-weight: bold; text-align: center; font-size: 12px; }
+
+    .winner { font-weight: bold; color: #27ae60; }
+    .loser { color: #c92a2a; }
+
+    .section { background: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .section h2 { color: #667eea; font-size: 24px; margin-bottom: 20px; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+
+    .score-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .score-box {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+
+    .score-box.tra { border-color: #e74c3c; }
+    .score-box.subtel { border-color: #27ae60; }
+
+    .score-number {
+      font-size: 48px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .score-box.tra .score-number { color: #e74c3c; }
+    .score-box.subtel .score-number { color: #27ae60; }
+
+    .recommendation {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    .recommendation h3 { font-size: 20px; margin-bottom: 15px; }
+    .recommendation ul { margin-left: 20px; }
+    .recommendation li { margin: 8px 0; }
+
+    .chart-bar {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      gap: 10px;
+    }
+
+    .chart-label { width: 150px; font-weight: bold; }
+    .chart-fill { flex: 1; height: 30px; background: linear-gradient(90deg, #e74c3c 0%, #27ae60 100%); border-radius: 4px; position: relative; }
+    .chart-value { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-weight: bold; }
+
+    .footer { text-align: center; padding: 20px; color: white; }
+
+    @media (max-width: 900px) {
+      .vs-container { grid-template-columns: 1fr; }
+      .table-header, .table-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚖️ Comparativa: TRA (UAE) vs SUBTEL (Chile)</h1>
+      <p>Análisis de Reguladores de Telecomunicaciones</p>
+      <p style="margin-top: 10px; font-size: 13px; color: #999;">Benchmarking de madurez digital y experiencia de usuario</p>
+    </header>
+
+    <!-- COMPARATIVA LADO A LADO -->
+    <div class="vs-container">
+      <div class="side tra">
+        <h2>🔴 TRA (Emiratos Árabes)</h2>
+
+        <div class="feature-row">
+          <span class="feature-name">Portal Online</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Mobile First</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Búsqueda</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Dashboard</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Chatbot IA</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">APIs</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Accesibilidad</span>
+          <span class="feature-status status-partial">⚠️ PARCIAL</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Multilingüismo</span>
+          <span class="feature-status status-partial">⚠️ PARCIAL</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Soporte 24/7</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Design System</span>
+          <span class="feature-status status-no">❌ NO</span>
+        </div>
+      </div>
+
+      <div class="side subtel">
+        <h2>🟢 SUBTEL (Chile)</h2>
+
+        <div class="feature-row">
+          <span class="feature-name">Portal Online</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Mobile First</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Búsqueda</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Dashboard</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Chatbot IA</span>
+          <span class="feature-status status-yes">✅ IRCO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">APIs</span>
+          <span class="feature-status status-partial">🔄 EN DESARROLLO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Accesibilidad</span>
+          <span class="feature-status status-yes">✅ WCAG 2.1 AA</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Multilingüismo</span>
+          <span class="feature-status status-yes">✅ ES COMPLETO</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Soporte 24/7</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+
+        <div class="feature-row">
+          <span class="feature-name">Design System</span>
+          <span class="feature-status status-yes">✅ SÍ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLA COMPARATIVA GENERAL -->
+    <div class="section">
+      <h2>📊 Tabla Comparativa Completa</h2>
+
+      <div class="comparison-table">
+        <div class="table-header">
+          <div>Aspecto</div>
+          <div style="text-align: center;">TRA</div>
+          <div style="text-align: center;">SUBTEL</div>
+          <div style="text-align: center;">Ganador</div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Portal de Solicitudes</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ SÍ</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Mobile First</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ SÍ</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Búsqueda Indexada</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ SÍ</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Dashboard Datos</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ SÍ</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Accesibilidad WCAG</strong></div>
+          <div><span class="badge-tra">⚠️ PARCIAL</span></div>
+          <div><span class="badge-subtel">✅ 2.1 AA</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Chatbot IA</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ IRCO</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>APIs Públicas</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-tra">🔄 DESARROLLO</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Soporte Omnicanal</strong></div>
+          <div><span class="badge-tra">⚠️ EMAIL</span></div>
+          <div><span class="badge-subtel">✅ 4+ CANALES</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Seguridad Enterprise</strong></div>
+          <div><span class="badge-tra">⚠️ BÁSICO</span></div>
+          <div><span class="badge-subtel">✅ COMPLETO</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+
+        <div class="table-row">
+          <div><strong>Design System</strong></div>
+          <div><span class="badge-tra">❌ NO</span></div>
+          <div><span class="badge-subtel">✅ KIT DIGITAL</span></div>
+          <div><span class="winner">SUBTEL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUNTUACIÓN GENERAL -->
+    <div class="section">
+      <h2>📈 Puntuación General (0-10)</h2>
+      <div class="score-container">
+        <div class="score-box tra">
+          <div>🔴 TRA (UAE)</div>
+          <div class="score-number">2.5</div>
+          <div style="color: #666;">Fase: Digital Básica</div>
+          <small style="color: #999;">Necesita transformación urgente</small>
+        </div>
+
+        <div class="score-box subtel">
+          <div>🟢 SUBTEL (Chile)</div>
+          <div class="score-number">7.5</div>
+          <div style="color: #666;">Fase: Digital Avanzada</div>
+          <small style="color: #999;">Camino a madurez 5.0</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRECHA TEMPORAL -->
+    <div class="section">
+      <h2>⏰ Brecha Temporal</h2>
+      <p style="margin-bottom: 20px; font-size: 16px;">SUBTEL está <strong>3-4 años adelante</strong> en transformación digital:</p>
+
+      <div class="chart-bar">
+        <div class="chart-label">Portal Online:</div>
+        <div class="chart-fill" style="width: 100%;">
+          <div class="chart-value">5 años</div>
+        </div>
+      </div>
+
+      <div class="chart-bar">
+        <div class="chart-label">Mobile First:</div>
+        <div class="chart-fill" style="width: 80%;">
+          <div class="chart-value">4 años</div>
+        </div>
+      </div>
+
+      <div class="chart-bar">
+        <div class="chart-label">Datos Abiertos:</div>
+        <div class="chart-fill" style="width: 60%;">
+          <div class="chart-value">3 años</div>
+        </div>
+      </div>
+
+      <div class="chart-bar">
+        <div class="chart-label">IA/Chatbot:</div>
+        <div class="chart-fill" style="width: 40%;">
+          <div class="chart-value">2 años</div>
+        </div>
+      </div>
+
+      <div class="chart-bar">
+        <div class="chart-label">Accesibilidad:</div>
+        <div class="chart-fill" style="width: 60%;">
+          <div class="chart-value">3 años</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMENDACIONES PARA TRA -->
+    <div class="section">
+      <h2>🎯 Recomendaciones Estratégicas para TRA</h2>
+
+      <div class="recommendation">
+        <h3>COPIAR DE SUBTEL (Áreas Replicables 100%)</h3>
+        <ul>
+          <li>✅ Arquitectura de portal de solicitudes</li>
+          <li>✅ Estrategia de búsqueda indexada</li>
+          <li>✅ Validación de accesibilidad WCAG</li>
+          <li>✅ Mobile-first responsive design</li>
+          <li>✅ Chatbot IA (modelo de IRCO)</li>
+          <li>✅ Dashboard de KPIs públicos</li>
+          <li>✅ Estructura de APIs REST/GraphQL</li>
+          <li>✅ Ciclos ágiles de mejora</li>
+        </ul>
+      </div>
+
+      <div class="recommendation">
+        <h3>DIFERENCIAS A MANTENER (Contexto Emiratí)</h3>
+        <ul>
+          <li>🔴 Lenguaje árabe como prioritario (no solo EN)</li>
+          <li>🔴 Regulaciones locales emiratís</li>
+          <li>🔴 Contexto de 4 operadores principales</li>
+          <li>🔴 Diseño culturalmente apropiado para UAE</li>
+          <li>🔴 Horarios y festivos locales</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HOJA DE RUTA -->
+    <div class="section">
+      <h2>🚀 Hoja de Ruta TRA (18 Meses)</h2>
+
+      <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+        <h3 style="color: #667eea;">Fase 1 (0-6 meses): $400-600K</h3>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>Portal de solicitudes (copia SIGA)</li>
+          <li>Búsqueda indexada 100%</li>
+          <li>Validación WCAG 2.1 AA</li>
+          <li>Mobile-first responsive</li>
+        </ul>
+      </div>
+
+      <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+        <h3 style="color: #667eea;">Fase 2 (6-12 meses): $300-500K</h3>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>Dashboard datos abiertos</li>
+          <li>Chatbot IA bilingüe (EN + AR)</li>
+          <li>Integración sistemas emiratís</li>
+          <li>Design System local</li>
+        </ul>
+      </div>
+
+      <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+        <h3 style="color: #667eea;">Fase 3 (12-18 meses): $300-400K</h3>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>APIs públicas robustas</li>
+          <li>Predicción de demanda de espectro</li>
+          <li>Automatización de procesos</li>
+          <li>Analytics avanzados</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CONCLUSIÓN -->
+    <div class="section">
+      <h2>💡 Conclusión</h2>
+      <p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px;">
+        <strong>SUBTEL está 3-4 años adelante de TRA en transformación digital.</strong>
+        El modelo de Chile es replicable al 80% para Emiratos Árabes, con adaptaciones culturales y lingüísticas.
+      </p>
+
+      <p style="font-size: 16px; line-height: 1.8; margin-bottom: 15px;">
+        <strong>La brecha es salvable en 18 meses con inversión de $1.0-1.5M</strong>, lo que es
+        mucho menor al costo de mantener procesos analógicos ineficientes.
+      </p>
+
+      <p style="font-size: 16px; line-height: 1.8;">
+        <strong>Recomendación:</strong> TRA debería estudiar el modelo de SUBTEL,
+        posiblemente con consultoría local que entienda contexto emiratí, para ejecutar transformación rápida y efectiva.
+      </p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p style="font-weight: bold; margin-bottom: 10px;">Comparativa TRA vs SUBTEL</p>
+    <p>Análisis de Madurez Digital - Reguladores de Telecomunicaciones</p>
+    <p style="margin-top: 10px; opacity: 0.8;">Completado: Junio 2026 | Benchmarking Global</p>
+  </footer>
+</body>
+</html>

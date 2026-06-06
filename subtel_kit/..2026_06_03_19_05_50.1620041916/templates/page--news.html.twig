@@ -1,0 +1,91 @@
+{{ attach_library('subtel_kit/global') }}
+<a href="#main-content" class="subtel-skip">Saltar al contenido principal</a>
+<div class="subtel-portal">
+  <header class="subtel-header" role="banner">
+    <div class="subtel-govbar">
+      <span>Gobierno de Chile</span>
+      <span>Subsecretaria de Telecomunicaciones</span>
+    </div>
+    <div class="subtel-nav">
+      <a class="subtel-brand" href="/" aria-label="Inicio SUBTEL">
+        <span class="subtel-brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>SUBTEL</strong>
+          <small>Plataforma digital de solicitudes</small>
+        </span>
+      </a>
+      <nav aria-label="Navegacion principal">
+        <a href="/">Inicio</a>
+        <a href="/noticias">Noticias</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="subtel-news-page">
+    <section class="subtel-band" aria-labelledby="noticias-title">
+      <div class="subtel-section-head">
+        <p class="subtel-eyebrow">Informacion actualizada</p>
+        <h1 id="noticias-title">Noticias y Anuncios</h1>
+      </div>
+
+      {% if page.content %}
+        <div class="subtel-news-content">
+          {{ page.content }}
+        </div>
+      {% else %}
+        <div class="news-carousel">
+          {# Placeholder news items - Serán reemplazados por contenido dinámico #}
+          <article class="news-card">
+            <div class="news-card-image" style="background: linear-gradient(135deg, #0f3460 0%, #081e3e 100%);"></div>
+            <div class="news-card-content">
+              <span class="news-card-date">{{ 'now'|date('d.m.Y') }}</span>
+              <h3 class="news-card-title">Actualización de plataforma digital</h3>
+              <p class="news-card-excerpt">Nueva versión con mejoras en usabilidad y seguridad para ciudadanos y operadores.</p>
+              <a href="#" class="news-card-link">Leer más →</a>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-card-image" style="background: linear-gradient(135deg, #e94560 0%, #c42847 100%);"></div>
+            <div class="news-card-content">
+              <span class="news-card-date">{{ 'now'|date('d.m.Y', -1) }}</span>
+              <h3 class="news-card-title">Disponible IRCO - Asistente IA</h3>
+              <p class="news-card-excerpt">Nuevo asistente de inteligencia artificial para consultas y orientación sobre trámites.</p>
+              <a href="#" class="news-card-link">Leer más →</a>
+            </div>
+          </article>
+
+          <article class="news-card">
+            <div class="news-card-image" style="background: linear-gradient(135deg, #419d78 0%, #2d6a4f 100%);"></div>
+            <div class="news-card-content">
+              <span class="news-card-date">{{ 'now'|date('d.m.Y', -2) }}</span>
+              <h3 class="news-card-title">Mantenimiento programado</h3>
+              <p class="news-card-excerpt">Se realizará mantenimiento en los servidores durante la madrugada del próximo sábado.</p>
+              <a href="#" class="news-card-link">Leer más →</a>
+            </div>
+          </article>
+        </div>
+      {% endif %}
+    </section>
+
+    {% if page.irco %}
+      <section class="subtel-band">
+        {{ page.irco }}
+      </section>
+    {% endif %}
+
+    <section class="subtel-status-strip" id="soporte" aria-label="Enlaces de soporte">
+      <a href="/contacto">Contacto</a>
+      <a href="/faq">Preguntas Frecuentes</a>
+      <a href="/tramites">Trámites</a>
+      <a href="/estado">Estado del sistema</a>
+    </section>
+  </main>
+
+  <footer class="subtel-footer">
+    <strong>SUBTEL</strong>
+    <span>Subsecretaría de Telecomunicaciones · Chile</span>
+  </footer>
+</div>

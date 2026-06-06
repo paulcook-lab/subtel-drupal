@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativa: GOV.UK vs MKM.ee vs SUBTEL vs TRA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        header h1 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1400px) {
+            .comparison-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .site-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .site-header {
+            padding: 20px;
+            border-bottom: 4px solid;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: white;
+            text-align: center;
+        }
+
+        .site-header.govuk {
+            background: linear-gradient(135deg, #0b4da3 0%, #2a5298 100%);
+            border-bottom-color: #0b4da3;
+        }
+
+        .site-header.mkm {
+            background: linear-gradient(135deg, #003d7a 0%, #0052a3 100%);
+            border-bottom-color: #0052a3;
+        }
+
+        .site-header.subtel {
+            background: linear-gradient(135deg, #475156 0%, #5a7380 100%);
+            border-bottom-color: #475156;
+        }
+
+        .site-header.tra {
+            background: linear-gradient(135deg, #cc0000 0%, #ff4444 100%);
+            border-bottom-color: #cc0000;
+        }
+
+        .site-content {
+            padding: 16px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .component-section {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95em;
+        }
+
+        .component-section:last-child {
+            border-bottom: none;
+        }
+
+        .component-name {
+            font-weight: bold;
+            color: #0b4da3;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+
+        .component-details {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.4;
+            margin-left: 4px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+
+        .status.yes {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.partial {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.no {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .detailed-comparison {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .detailed-comparison h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #1e3c72;
+            padding-bottom: 10px;
+        }
+
+        .detailed-comparison h3 {
+            color: #2a5298;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        th {
+            background: #f0f4f8;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid #1e3c72;
+            color: #1e3c72;
+        }
+
+        td {
+            padding: 11px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .highlight {
+            background: #fff8e1;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .highlight h4 {
+            color: #ff6f00;
+            margin-bottom: 8px;
+        }
+
+        .highlight p {
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .winner {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-size: 0.9em;
+            color: #155724;
+        }
+
+        .action-item {
+            background: #e7f3ff;
+            border-left: 4px solid #0b4da3;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-size: 0.9em;
+            color: #0b4da3;
+        }
+
+        .footer {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .matrix-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .matrix-header {
+            font-weight: bold;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            background: #1e3c72;
+        }
+
+        .matrix-cell {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        .feature-name {
+            font-weight: bold;
+            color: #1e3c72;
+            padding: 10px;
+        }
+
+        .badge-govuk { background: #0b4da3; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; }
+        .badge-mkm { background: #003d7a; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; }
+        .badge-subtel { background: #475156; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; }
+        .badge-tra { background: #cc0000; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Comparativa Global de Sitios Gubernamentales</h1>
+            <p>GOV.UK (UK) vs MKM.ee (Estonia) vs SUBTEL (Chile) vs TRA (UAE)</p>
+        </header>
+
+        <div class="comparison-grid">
+            <!-- GOV.UK -->
+            <div class="site-card">
+                <div class="site-header govuk">🇬🇧 GOV.UK (UK)</div>
+                <div class="site-content">
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Header</div>
+                        <div class="component-details">Azul marino + logo GOV.UK, búsqueda arriba</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Mega Menu</div>
+                        <div class="component-details">20+ categorías principales, organizado jerárquicamente</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Hero Search</div>
+                        <div class="component-details">"Best place to find government services"</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Popular Links</div>
+                        <div class="component-details">Quick access a servicios más usados</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Service Categories</div>
+                        <div class="component-details">Grid de servicios con descripciones</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Featured Section</div>
+                        <div class="component-details">Servicios destacados con iconos</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Feedback Widget</div>
+                        <div class="component-details">"Is this page useful?" inline</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Cookie Banner</div>
+                        <div class="component-details">GDPR + analytics consent</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Accessibility</div>
+                        <div class="component-details">WCAG 2.1 AA + skip links</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Multicolumn Footer</div>
+                        <div class="component-details">10+ columnas, sitemap completo</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MKM.EE -->
+            <div class="site-card">
+                <div class="site-header mkm">🇪🇪 MKM.ee (Estonia)</div>
+                <div class="site-content">
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Header</div>
+                        <div class="component-details">Logo + búsqueda, simpler que GOV.UK</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Search Bar</div>
+                        <div class="component-details">Prominente, con sugerencias</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Language Selector</div>
+                        <div class="component-details">EE/EN muy visible en header</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Accessibility Controls</div>
+                        <div class="component-details">Tamaño texto, contraste, reset</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Hero Image</div>
+                        <div class="component-details">Con overlay text, CTA button</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Service Grid</div>
+                        <div class="component-details">3 columnas, cards con descripción</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Cookie Banner</div>
+                        <div class="component-details">GDPR compliant, granular</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status partial">⚠</span> Footer</div>
+                        <div class="component-details">Básico, 3-4 columnas</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Feedback</div>
+                        <div class="component-details">No hay widget de feedback visible</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Mobile First</div>
+                        <div class="component-details">Responsive completo</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTEL -->
+            <div class="site-card">
+                <div class="site-header subtel">🇨🇱 SUBTEL (Chile)</div>
+                <div class="site-content">
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Header</div>
+                        <div class="component-details">Menú 3-niveles, búsqueda integrada</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Hero Carousel</div>
+                        <div class="component-details">3 banners, auto-play 5s</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Service Cards</div>
+                        <div class="component-details">Grid 2-4 cols, iconos consistentes</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> News Carousel</div>
+                        <div class="component-details">Tarjetas con fecha, title, excerpt</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> IRCO Chatbot</div>
+                        <div class="component-details">IA embebida, badge "Beta"</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Dashboard</div>
+                        <div class="component-details">KPIs, mapas interactivos</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Portal Online</div>
+                        <div class="component-details">SIGA, SGF, solicitudes</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status yes">✓</span> Design System</div>
+                        <div class="component-details">Kit Digital Gov.cl coherente</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Feedback Widget</div>
+                        <div class="component-details">No visible en homepage</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Language Selector</div>
+                        <div class="component-details">Solo español</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRA -->
+            <div class="site-card">
+                <div class="site-header tra">🇦🇪 TRA (UAE) - NECESITA</div>
+                <div class="site-content">
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Header Moderno</div>
+                        <div class="component-details">Necesita: búsqueda + EN/AR</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Mega Menu</div>
+                        <div class="component-details">Tipo GOV.UK pero EN/AR</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Hero Carousel</div>
+                        <div class="component-details">Tipo SUBTEL, temas UAE</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Accessibility</div>
+                        <div class="component-details">WCAG 2.1 AA + controles MKM</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Popular Links</div>
+                        <div class="component-details">Quick access a servicios frecuentes</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Portal Solicitudes</div>
+                        <div class="component-details">Online + seguimiento real-time</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Chatbot IA</div>
+                        <div class="component-details">EN + AR bilingüe</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Feedback Widget</div>
+                        <div class="component-details">Tipo GOV.UK inline</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Dashboard Datos</div>
+                        <div class="component-details">Espectro, cobertura, mapas</div>
+                    </div>
+
+                    <div class="component-section">
+                        <div class="component-name"><span class="status no">✗</span> Design System</div>
+                        <div class="component-details">Colores UAE, RTL support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Analysis -->
+        <div class="detailed-comparison">
+            <h2>📊 Análisis Detallado por Componentes</h2>
+
+            <h3>1. Navegación y Estructura</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th><span class="badge-govuk">GOV.UK</span></th>
+                        <th><span class="badge-mkm">MKM.ee</span></th>
+                        <th><span class="badge-subtel">SUBTEL</span></th>
+                        <th>Recomendación TRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Estructura Menu</strong></td>
+                        <td>Mega-menu 20+ categorías</td>
+                        <td>Nav simple + búsqueda</td>
+                        <td>Menú 3-niveles jerárquico</td>
+                        <td>Mega-menu tipo GOV.UK + EN/AR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Búsqueda</strong></td>
+                        <td>Arriba, prominent</td>
+                        <td>En header, autocompletado</td>
+                        <td>Integrada en nav</td>
+                        <td>Indexada (ElasticSearch) + OCR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Selector Idioma</strong></td>
+                        <td>No aplica (UK)</td>
+                        <td>EE/EN muy visible</td>
+                        <td>Solo ES</td>
+                        <td>EN/AR muy prominente (tipo MKM)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Breadcrumb</strong></td>
+                        <td>Sí, siempre visible</td>
+                        <td>No visible</td>
+                        <td>No visible</td>
+                        <td>Sí, para navegación clara</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sticky Header</strong></td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>Sí</td>
+                        <td>Sí (mejor UX en scroll)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. Experiencia de Usuario</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th><span class="badge-govuk">GOV.UK</span></th>
+                        <th><span class="badge-mkm">MKM.ee</span></th>
+                        <th><span class="badge-subtel">SUBTEL</span></th>
+                        <th>Recomendación TRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hero Section</strong></td>
+                        <td>Static search hero</td>
+                        <td>Imagen + overlay</td>
+                        <td>Carousel 3 banners</td>
+                        <td>Carousel (SUBTEL) + temas UAE</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Popular/Quick Links</strong></td>
+                        <td>✓ Sí, 4-6 links</td>
+                        <td>✗ No</td>
+                        <td>✗ No</td>
+                        <td>✓ Tipo GOV.UK (HMRC, eVisa, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Service Categories</strong></td>
+                        <td>Left column list</td>
+                        <td>Grid 3-cols</td>
+                        <td>Cards 2-4 cols</td>
+                        <td>Grid 4-cols en desktop, responsive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Featured Section</strong></td>
+                        <td>✓ Sí (right sidebar)</td>
+                        <td>✗ No</td>
+                        <td>✗ No</td>
+                        <td>✓ Servicios destacados con iconos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>News/Updates</strong></td>
+                        <td>Government activity (list)</td>
+                        <td>No visible</td>
+                        <td>Carousel noticias</td>
+                        <td>Carousel noticias (tipo SUBTEL)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3. Accesibilidad e Inclusión</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th><span class="badge-govuk">GOV.UK</span></th>
+                        <th><span class="badge-mkm">MKM.ee</span></th>
+                        <th><span class="badge-subtel">SUBTEL</span></th>
+                        <th>Recomendación TRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>WCAG Compliance</strong></td>
+                        <td>2.1 AA ✓</td>
+                        <td>2.1 AA ✓</td>
+                        <td>2.1 AA (parcial)</td>
+                        <td>2.1 AA (audit + testing)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contraste</strong></td>
+                        <td>Cumple (4.5:1+)</td>
+                        <td>Cumple + toggle</td>
+                        <td>Cumple</td>
+                        <td>Cumple + toggle contraste (MKM)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tamaño Texto</strong></td>
+                        <td>Zoom navegador</td>
+                        <td>Toggle A/AA/AAA</td>
+                        <td>Defecto (16px)</td>
+                        <td>Toggle + CSS variables</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skip Links</strong></td>
+                        <td>✓ Sí</td>
+                        <td>✓ Sí</td>
+                        <td>✗ No visible</td>
+                        <td>✓ Sí (GOV.UK standard)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Screen Reader</strong></td>
+                        <td>Full support</td>
+                        <td>Full support</td>
+                        <td>Partial</td>
+                        <td>Full support (ARIA labels)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4. Servicios Digitales y Automatización</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th><span class="badge-govuk">GOV.UK</span></th>
+                        <th><span class="badge-mkm">MKM.ee</span></th>
+                        <th><span class="badge-subtel">SUBTEL</span></th>
+                        <th>Recomendación TRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Portal Solicitudes</strong></td>
+                        <td>✓ Sí (20+ servicios online)</td>
+                        <td>Linking a servicios</td>
+                        <td>✓ SIGA + SGF</td>
+                        <td>✓ Tipo SUBTEL + bilingüe</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chatbot IA</strong></td>
+                        <td>✗ No</td>
+                        <td>✗ No</td>
+                        <td>✓ IRCO</td>
+                        <td>✓ Tipo IRCO (EN + AR)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dashboard Datos</strong></td>
+                        <td>Research & Statistics section</td>
+                        <td>Linking a datos abiertos</td>
+                        <td>✓ Dashboard completo</td>
+                        <td>✓ Espectro + cobertura</td>
+                    </tr>
+                    <tr>
+                        <td><strong>APIs Públicas</strong></td>
+                        <td>✓ Sí</td>
+                        <td>Parcial</td>
+                        <td>En desarrollo</td>
+                        <td>✓ Roadmap 12 meses</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5. Retroalimentación y Mejora Continua</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th><span class="badge-govuk">GOV.UK</span></th>
+                        <th><span class="badge-mkm">MKM.ee</span></th>
+                        <th><span class="badge-subtel">SUBTEL</span></th>
+                        <th>Recomendación TRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Feedback Widget</strong></td>
+                        <td>✓ "Was this helpful?" inline</td>
+                        <td>✗ No visible</td>
+                        <td>✗ No visible</td>
+                        <td>✓ Tipo GOV.UK + formulario detail</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Survey Link</strong></td>
+                        <td>✓ Post-session</td>
+                        <td>✗ No</td>
+                        <td>✗ No</td>
+                        <td>✓ Integrado con analytics</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics</strong></td>
+                        <td>✓ Completo</td>
+                        <td>Parcial</td>
+                        <td>✓ Matomo</td>
+                        <td>✓ Google Analytics 4 + heatmaps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bug Reporting</strong></td>
+                        <td>Report problem link</td>
+                        <td>✗ No visible</td>
+                        <td>✗ No visible</td>
+                        <td>✓ Simple form (no PII)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight">
+                <h4>🏆 Lecciones Clave de GOV.UK (Mejor Práctica Global)</h4>
+                <p>GOV.UK es considerado el <strong>mejor sitio gubernamental del mundo</strong>. Sus características a adoptar:</p>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Mega-menu claro:</strong> 20 categorías bien organizadas</li>
+                    <li><strong>Quick access links:</strong> Los servicios más usados arriba (HMRC, eVisas, etc.)</li>
+                    <li><strong>Feedback inline:</strong> "Was this page useful?" en cada página</li>
+                    <li><strong>Breadcrumbs:</strong> Orientación clara de dónde estás</li>
+                    <li><strong>Accessibility first:</strong> WCAG 2.1 AA en todo, skip links</li>
+                    <li><strong>Multicolumn footer:</strong> 10+ columnas con sitemap completo</li>
+                    <li><strong>Simple, clean design:</strong> Sin distracciones, enfoque en contenido</li>
+                </ul>
+            </div>
+
+            <div class="action-item">
+                <h4>✅ Recomendación para TRA: Híbrido GOV.UK + SUBTEL</h4>
+                <p>
+                    <strong>Estructura:</strong> Mega-menu tipo GOV.UK<br>
+                    <strong>Hero:</strong> Carousel tipo SUBTEL<br>
+                    <strong>Popular Links:</strong> Tipo GOV.UK<br>
+                    <strong>Services:</strong> Grid tipo MKM.ee<br>
+                    <strong>Accesibilidad:</strong> Controles tipo MKM.ee<br>
+                    <strong>Feedback:</strong> Widget tipo GOV.UK<br>
+                    <strong>Idioma:</strong> EN/AR tipo MKM.ee<br>
+                    <strong>Chatbot:</strong> Tipo IRCO (SUBTEL)<br>
+                </p>
+            </div>
+        </div>
+
+        <!-- Recommendation Summary -->
+        <div class="detailed-comparison">
+            <h2>🎯 Resumen de Recomendaciones para TRA</h2>
+
+            <h3>Top Componentes a Copiar (Ranked by Priority)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rango</th>
+                        <th>Componente</th>
+                        <th>Fuente</th>
+                        <th>Justificación</th>
+                        <th>Impacto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P0 #1</strong></td>
+                        <td>Mega-Menu Navigation</td>
+                        <td>GOV.UK (20 cats)</td>
+                        <td>Best-in-class information architecture</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P0 #2</strong></td>
+                        <td>Quick Access Links</td>
+                        <td>GOV.UK</td>
+                        <td>Reduce cognitive load, faster task completion</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P0 #3</strong></td>
+                        <td>Hero Carousel</td>
+                        <td>SUBTEL</td>
+                        <td>Modern, engaging, proven</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P0 #4</strong></td>
+                        <td>Service Grid</td>
+                        <td>MKM.ee (3-cols)</td>
+                        <td>Clean, scannable, responsive</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P0 #5</strong></td>
+                        <td>Accessibility Controls</td>
+                        <td>MKM.ee</td>
+                        <td>Inclusive, WCAG AA, user control</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P0 #6</strong></td>
+                        <td>Feedback Widget</td>
+                        <td>GOV.UK</td>
+                        <td>Continuous improvement signal, cheap to implement</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P1 #7</strong></td>
+                        <td>Language Selector</td>
+                        <td>MKM.ee</td>
+                        <td>EN/AR equally prominent</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P1 #8</strong></td>
+                        <td>Portal de Solicitudes</td>
+                        <td>SUBTEL (SIGA)</td>
+                        <td>Core regulatory service, critical</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P1 #9</strong></td>
+                        <td>Chatbot IA</td>
+                        <td>SUBTEL (IRCO)</td>
+                        <td>24/7 support, reduces ticket load</td>
+                        <td>⭐⭐⭐⭐</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P2 #10</strong></td>
+                        <td>Dashboard & APIs</td>
+                        <td>GOV.UK + SUBTEL</td>
+                        <td>Data transparency, ecosystem</td>
+                        <td>⭐⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Estimación Revisada (Incluye GOV.UK learnings)</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fase</th>
+                        <th>Duration</th>
+                        <th>Focus</th>
+                        <th>Costo Est.</th>
+                        <th>MVP Ready?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fase 1:</strong> Foundation</td>
+                        <td>0-3 meses</td>
+                        <td>Header (GOV.UK-style), Hero (SUBTEL), Services (MKM), Accessibility, Feedback</td>
+                        <td>$40K</td>
+                        <td>✓ Sí (70% mejora)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 2:</strong> Services</td>
+                        <td>3-6 meses</td>
+                        <td>Portal, Search, Chatbot, Dashboard, Language selector</td>
+                        <td>$100K</td>
+                        <td>✓ Sí (90% funcional)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fase 3:</strong> Innovation</td>
+                        <td>6-12 meses</td>
+                        <td>APIs, Advanced Analytics, Automation, Optimization</td>
+                        <td>$110K</td>
+                        <td>✓ Completo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>12 meses</strong></td>
+                        <td>Transformación digital completa</td>
+                        <td><strong>$250-350K</strong></td>
+                        <td><strong>✓ YES</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>🌍 Análisis Comparativo Global de Sitios Gubernamentales</p>
+            <p>Analizado: GOV.UK, MKM.ee, SUBTEL.gob.cl, TRA (UAE)</p>
+            <p style="margin-top: 10px; color: #999; font-size: 0.85em;">
+                Fecha: 06 de Junio, 2026 | Metodología: Benchmarking de reguladores globales
+            </p>
+        </div>
+    </div>
+</body>
+</html>

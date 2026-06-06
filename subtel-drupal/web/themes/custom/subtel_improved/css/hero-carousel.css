@@ -1,0 +1,235 @@
+/**
+ * HERO-CAROUSEL.CSS - Hero carousel styles
+ */
+
+.hero-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-gray-900);
+}
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+  z-index: 1;
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+}
+
+.slide-text {
+  max-width: 600px;
+  color: white;
+  text-align: center;
+  animation: slideInUp 600ms ease-out;
+}
+
+.slide-text h1 {
+  color: white;
+  margin-bottom: var(--space-md);
+  font-size: clamp(28px, 5vw, 48px);
+}
+
+.slide-text p {
+  font-size: clamp(16px, 2vw, 20px);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Navigation dots */
+.carousel-nav {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.nav-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-dot.active {
+  background-color: white;
+  width: 32px;
+  border-radius: 6px;
+}
+
+.nav-dot:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Play/Pause button */
+.carousel-play-pause {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  z-index: 3;
+}
+
+.carousel-play-pause:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-play-pause svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 300px;
+  }
+
+  .slide-content {
+    padding: var(--space-lg);
+  }
+
+  .slide-text h1 {
+    font-size: 24px;
+  }
+
+  .slide-text p {
+    font-size: 16px;
+  }
+
+  .carousel-nav {
+    bottom: 16px;
+  }
+
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .nav-dot.active {
+    width: 24px;
+  }
+
+  .carousel-play-pause {
+    width: 40px;
+    height: 40px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-carousel {
+    height: 250px;
+  }
+
+  .slide-text h1 {
+    font-size: 20px;
+  }
+
+  .slide-text p {
+    font-size: 14px;
+  }
+
+  .carousel-nav {
+    gap: 6px;
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .nav-dot.active {
+    width: 18px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: opacity 200ms ease-in;
+  }
+
+  .slide-text {
+    animation: none;
+  }
+}

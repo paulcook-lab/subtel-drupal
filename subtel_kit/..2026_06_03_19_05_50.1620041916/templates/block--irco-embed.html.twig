@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label ('visible' or 'hidden').
+ *   - provider: The module or custom code that provides the block.
+ *   - Block plugin specific settings will also be stored here.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+<section{{ attributes.addClass('irco-embed') }}>
+  <div class="irco-embed-header">
+    <div class="irco-embed-icon" role="img" aria-label="IRCO - Asistente de Inteligencia Artificial">🤖</div>
+    <h3>IRCO - Asistente Inteligente</h3>
+    <span class="irco-embed-badge">Beta</span>
+  </div>
+  <div class="irco-embed-container">
+    {% if content.field_irco_url %}
+      {{ content.field_irco_url }}
+    {% else %}
+      <iframe
+        src="http://172.30.10.179:5173/"
+        title="IRCO - Asistente de Inteligencia Artificial"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    {% endif %}
+  </div>
+</section>

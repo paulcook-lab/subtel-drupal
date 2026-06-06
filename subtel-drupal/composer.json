@@ -1,0 +1,10 @@
+{
+  "name": "subtel/drupal-improved",
+  "description": "SUBTEL Drupal 10 - Modernización KIT Digital Chile",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "drupal/core": "^10.0",
+    "drupal/core-composer-scaffold": "^10.0"
+  }
+}

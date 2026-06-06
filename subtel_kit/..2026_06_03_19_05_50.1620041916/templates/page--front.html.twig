@@ -1,0 +1,132 @@
+{{ attach_library('subtel_kit/global') }}
+<a href="#main-content" class="subtel-skip">Saltar al contenido principal</a>
+<div class="subtel-portal">
+  <header class="subtel-header" role="banner">
+    <div class="subtel-govbar">
+      <span>Gobierno de Chile</span>
+      <span>Subsecretaria de Telecomunicaciones</span>
+    </div>
+    <div class="subtel-nav">
+      <a class="subtel-brand" href="/" aria-label="Inicio SUBTEL">
+        <span class="subtel-brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>SUBTEL</strong>
+          <small>Plataforma digital de solicitudes</small>
+        </span>
+      </a>
+      <nav aria-label="Navegacion principal">
+        <a href="#tramites">Tramites</a>
+        <a href="#backoffice">Backoffice</a>
+        <a href="#trazabilidad">Trazabilidad</a>
+        <a href="/dashboard-ejecutivo">Dashboard</a>
+        <a href="/arquitectura-ha">Arquitectura</a>
+        <a href="#estado">Estado</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="subtel-hero" aria-labelledby="subtel-title">
+      <div>
+        <p class="subtel-eyebrow">SIGA · SGF · Reclamos/SGR</p>
+        <h1 id="subtel-title">Un solo canal para solicitudes, derivaciones y seguimiento SUBTEL.</h1>
+        <p class="subtel-lead">
+          Drupal actua como puerta de entrada institucional. FormsFlow queda como motor de formularios,
+          BPM, APIs y trazabilidad para flujos ciudadanos e internos.
+        </p>
+        <div class="subtel-actions" aria-label="Acciones principales">
+          <a class="subtel-button subtel-button-primary" href="/subtel/login/ciudadano?next=/nuevo-tramite">Iniciar solicitud</a>
+          <a class="subtel-button subtel-button-secondary" href="/subtel/login/funcionario">Entrar a backoffice</a>
+          <a class="subtel-button subtel-button-secondary" href="/arquitectura-ha">Ver arquitectura</a>
+        </div>
+      </div>
+      <aside class="subtel-status-panel" aria-label="Estado de plataforma">
+        <h2>Estado local</h2>
+        <dl>
+          <div><dt>Frontend</dt><dd>Drupal 10</dd></div>
+          <div><dt>Identidad</dt><dd>Keycloak + mocks</dd></div>
+          <div><dt>Motor</dt><dd>FormsFlow/Camunda</dd></div>
+          <div><dt>Observabilidad</dt><dd>Prometheus · Grafana · Loki</dd></div>
+          <div><dt>Blueprint</dt><dd>HA GCP / On-prem</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="subtel-band" id="tramites" aria-labelledby="tramites-title">
+      <div class="subtel-section-head">
+        <p class="subtel-eyebrow">Portal ciudadano y operadores</p>
+        <h2 id="tramites-title">Catalogo inicial de dominios</h2>
+      </div>
+      <div class="subtel-card-grid">
+        <article class="subtel-card">
+          <span class="subtel-card-code">SIGA</span>
+          <h3>Concesiones y autorizaciones</h3>
+          <p>Ingreso, revision tecnica, derivacion entre unidades, subsanacion y resolucion.</p>
+          <a href="/subtel/login/ciudadano?next=/nuevo-tramite">Iniciar con ClaveUnica local</a>
+        </article>
+        <article class="subtel-card">
+          <span class="subtel-card-code">SGF</span>
+          <h3>Fiscalizacion</h3>
+          <p>Bandejas internas, asignacion por division/departamento y expediente de seguimiento.</p>
+          <a href="/subtel/login/funcionario">Entrar con SSO local</a>
+        </article>
+        <article class="subtel-card">
+          <span class="subtel-card-code">SGR</span>
+          <h3>Reclamos ciudadanos</h3>
+          <p>Recepcion externa, gestion de respuestas, notificaciones y cierre auditable.</p>
+          <a href="/mis-solicitudes">Seguir solicitud</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="subtel-workspace" id="backoffice" aria-labelledby="backoffice-title">
+      <div>
+        <p class="subtel-eyebrow">Gestion interna</p>
+        <h2 id="backoffice-title">Bandejas por rol, division y departamento</h2>
+        <p>
+          La navegacion Drupal mantiene el contexto institucional, mientras las tareas complejas
+          pueden abrir vistas FormsFlow/Camunda con SSO y permisos de Keycloak.
+        </p>
+      </div>
+      <div class="subtel-kanban" aria-label="Flujo base de expediente">
+        <span>Ingreso</span>
+        <span>Revision</span>
+        <span>Derivacion</span>
+        <span>Resolucion</span>
+        <span>Cierre</span>
+      </div>
+    </section>
+
+    <section class="subtel-band subtel-two-col" id="trazabilidad" aria-labelledby="trazabilidad-title">
+      <div>
+        <p class="subtel-eyebrow">Expediente digital</p>
+        <h2 id="trazabilidad-title">Auditoria y datos operacionales</h2>
+        <p>
+          Las solicitudes deben conservar estado, responsable, comentarios, adjuntos, cambios de etapa,
+          tiempos de respuesta y bitacora de derivaciones.
+        </p>
+      </div>
+      <ul class="subtel-checklist">
+        <li>PostgreSQL para flujos, identidad y catalogos.</li>
+        <li>MongoDB para Form.io y definiciones de formularios.</li>
+        <li>Valkey/Redis para cache y sesiones.</li>
+        <li>Grafana y Loki para salud tecnica; Matomo para analitica web.</li>
+      </ul>
+    </section>
+
+    <section class="subtel-status-strip" id="estado" aria-label="Enlaces tecnicos">
+      <a href="http://localhost:30082/checkpoint">WebAPI</a>
+      <a href="/estado/formio">Form.io</a>
+      <a href="http://localhost:30084/camunda/actuator/health">Camunda</a>
+      <a href="http://localhost:30085/auth/realms/subtel/.well-known/openid-configuration">Keycloak</a>
+      <a href="http://localhost:30300">Grafana local</a>
+      <a href="/dashboard-ejecutivo">Dashboard ejecutivo</a>
+      <a href="/arquitectura-ha">Arquitectura & HA</a>
+    </section>
+  </main>
+
+  <footer class="subtel-footer">
+    <strong>SUBTEL</strong>
+    <span>Plataforma local de QA · Docker Desktop Kubernetes</span>
+  </footer>
+</div>

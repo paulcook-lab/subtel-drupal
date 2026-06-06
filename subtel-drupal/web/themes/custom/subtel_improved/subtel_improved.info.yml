@@ -1,0 +1,60 @@
+name: SUBTEL Mejorado
+type: theme
+description: 'Tema Drupal 10 - SUBTEL modernizado con KIT Digital Chile'
+base theme: classy
+core_version_requirement: ^10
+
+# Regiones
+regions:
+  header: 'Encabezado'
+  quick_links: 'Accesos Rápidos'
+  hero: 'Hero/Banner'
+  content: 'Contenido Principal'
+  sidebar: 'Barra Lateral'
+  footer: 'Pie de Página'
+  chatbot: 'IRCO Chatbot'
+
+# Librerías CSS/JS
+libraries:
+  global:
+    version: VERSION
+    css:
+      base:
+        css/base.css: {}
+      component:
+        css/components.css: {}
+        css/typography.css: {}
+        css/layout.css: {}
+        css/responsive.css: {}
+    js:
+      js/main.js: {}
+  hero:
+    css:
+      component:
+        css/hero-carousel.css: {}
+    js:
+      js/hero-carousel.js: {}
+  menu:
+    css:
+      component:
+        css/mega-menu.css: {}
+    js:
+      js/mega-menu.js: {}
+  accessibility:
+    css:
+      component:
+        css/accessibility.css: {}
+    js:
+      js/accessibility-controls.js: {}
+
+# Breakpoints
+breakpoints:
+  mobile:
+    label: 'Mobile'
+    mediaQuery: '(max-width: 639px)'
+  tablet:
+    label: 'Tablet'
+    mediaQuery: '(min-width: 640px) and (max-width: 1023px)'
+  desktop:
+    label: 'Desktop'
+    mediaQuery: '(min-width: 1024px)'

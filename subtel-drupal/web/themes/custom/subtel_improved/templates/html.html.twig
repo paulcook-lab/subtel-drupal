@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the basic structure of a single Drupal page.
+ */
+#}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token|raw }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="{{ base_path }}{{ directory }}/images/favicon.ico" type="image/x-icon" />
+    <css-placeholder token="{{ placeholder_token|raw }}">
+    <js-placeholder token="{{ placeholder_token|raw }}">
+  </head>
+  <body{{ attributes }}>
+    {#
+      Keyboard navigation skip links
+    #}
+    <a href="#main-content" class="skip-link">
+      {{ 'Skip to main content'|t }}
+    </a>
+
+    {{ page_top }}
+
+    <div class="page-wrapper">
+      {{ page.header }}
+      {{ page.quick_links }}
+
+      <main id="main-content" role="main">
+        {{ page.hero }}
+
+        <div class="main-container">
+          <div class="main-content-area">
+            {{ page.content }}
+          </div>
+          {% if page.sidebar %}
+            <aside class="sidebar" role="complementary">
+              {{ page.sidebar }}
+            </aside>
+          {% endif %}
+        </div>
+      </main>
+
+      {{ page.chatbot }}
+      {{ page.footer }}
+    </div>
+
+    {{ page_bottom }}
+
+    <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+  </body>
+</html>

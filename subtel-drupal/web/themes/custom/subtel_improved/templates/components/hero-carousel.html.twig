@@ -1,0 +1,88 @@
+{#
+/**
+ * Hero Carousel Component - Auto-play carousel with 5 slides
+ * Integrated with Drupal view
+ */
+#}
+<div class="hero-carousel-wrapper" data-auto-play="true" data-interval="5000">
+  <div class="hero-carousel">
+    {# Slide 1: Solicitudes Online #}
+    <div class="hero-slide" style="background-image: url('/images/hero-1-solicitudes.jpg')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <h1>{{ 'Solicita tu Asignación de Espectro Online'|t }}</h1>
+          <p>{{ 'Acceso rápido, seguro y transparente a los servicios regulatorios de SUBTEL'|t }}</p>
+          <a href="/solicitudes" class="btn btn-primary">{{ 'Iniciar Solicitud'|t }}</a>
+        </div>
+      </div>
+    </div>
+
+    {# Slide 2: Datos Abiertos #}
+    <div class="hero-slide" style="background-image: url('/images/hero-2-datos.jpg')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <h1>{{ 'Datos Abiertos de Telecomunicaciones'|t }}</h1>
+          <p>{{ 'Acceso transparente a estadísticas de cobertura, tecnologías y mercado'|t }}</p>
+          <a href="/datos-abiertos" class="btn btn-primary">{{ 'Explorar Dashboard'|t }}</a>
+        </div>
+      </div>
+    </div>
+
+    {# Slide 3: IRCO Chatbot #}
+    <div class="hero-slide" style="background-image: url('/images/hero-3-irco.jpg')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <h1>{{ 'IRCO: Tu Asistente Inteligente'|t }}</h1>
+          <p>{{ 'Resuelve dudas sobre regulaciones, procesos y servicios en tiempo real'|t }}</p>
+          <a href="#irco-chat" class="btn btn-primary" data-toggle="modal">{{ 'Chatear Ahora'|t }}</a>
+        </div>
+      </div>
+    </div>
+
+    {# Slide 4: Cobertura 5G #}
+    <div class="hero-slide" style="background-image: url('/images/hero-4-5g.jpg')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <h1>{{ 'Tecnología 5G en Chile'|t }}</h1>
+          <p>{{ 'Revisa la cobertura y el despliegue de redes de próxima generación'|t }}</p>
+          <a href="/estadisticas/5g" class="btn btn-primary">{{ 'Ver Mapa de Cobertura'|t }}</a>
+        </div>
+      </div>
+    </div>
+
+    {# Slide 5: Protección del Consumidor #}
+    <div class="hero-slide" style="background-image: url('/images/hero-5-proteccion.jpg')">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-text">
+          <h1>{{ 'Protección del Consumidor'|t }}</h1>
+          <p>{{ 'Conoce tus derechos y cómo presentar un reclamo ante SUBTEL'|t }}</p>
+          <a href="/proteccion" class="btn btn-primary">{{ 'Más Información'|t }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {# Navigation #}
+  <div class="carousel-nav">
+    <button class="nav-dot active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="nav-dot" data-slide="1" aria-label="Slide 2"></button>
+    <button class="nav-dot" data-slide="2" aria-label="Slide 3"></button>
+    <button class="nav-dot" data-slide="3" aria-label="Slide 4"></button>
+    <button class="nav-dot" data-slide="4" aria-label="Slide 5"></button>
+  </div>
+
+  {# Play/Pause #}
+  <button class="carousel-play-pause" aria-label="Play/Pause carousel">
+    <svg class="play-icon" viewBox="0 0 24 24" width="24" height="24">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg class="pause-icon" style="display:none;" viewBox="0 0 24 24" width="24" height="24">
+      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+    </svg>
+  </button>
+</div>

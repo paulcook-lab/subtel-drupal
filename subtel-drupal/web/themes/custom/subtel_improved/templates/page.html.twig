@@ -1,0 +1,95 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ */
+#}
+<div class="page">
+  {# Header with Navigation #}
+  <header class="header" role="banner">
+    <div class="header-wrapper">
+      <div class="header-content">
+        <div class="logo-area">
+          <a href="{{ url('<front>') }}" class="logo" title="{{ 'Home'|t }}">
+            <img src="{{ base_path }}{{ directory }}/images/logo-subtel.svg" alt="SUBTEL" width="150" height="50" />
+          </a>
+        </div>
+
+        <nav class="mega-menu" role="navigation" aria-label="{{ 'Main navigation'|t }}">
+          <button class="menu-toggle" aria-controls="nav-menu" aria-expanded="false">
+            <span>{{ 'Menu'|t }}</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+
+          <div id="nav-menu" class="nav-menu">
+            {{ page.navigation }}
+          </div>
+        </nav>
+
+        <div class="header-actions">
+          <form class="search-form" role="search" method="get" action="{{ url('search/node') }}">
+            <div class="search-wrapper">
+              <input type="search" name="keys" class="search-input" placeholder="{{ 'Buscar...'|t }}" />
+              <button type="submit" class="search-button" aria-label="{{ 'Search'|t }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          <div class="lang-selector">
+            <button class="lang-toggle" aria-expanded="false" aria-controls="lang-menu">
+              <span>{{ 'ES'|t }}</span>
+            </button>
+            <ul id="lang-menu" class="lang-menu">
+              <li><a href="#" hreflang="es">Español</a></li>
+              <li><a href="#" hreflang="en">English</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {# Quick Access Links #}
+  {% if page.quick_links %}
+    <section class="quick-links-section" aria-label="{{ 'Quick access'|t }}">
+      <div class="container">
+        {{ page.quick_links }}
+      </div>
+    </section>
+  {% endif %}
+
+  {# Hero Section #}
+  {% if page.hero %}
+    <section class="hero-section" aria-label="{{ 'Featured content'|t }}">
+      {{ page.hero }}
+    </section>
+  {% endif %}
+
+  {# Main Content #}
+  <div class="main-wrapper">
+    <div class="container">
+      {{ page.content }}
+    </div>
+  </div>
+
+  {# IRCO Chatbot #}
+  {% if page.chatbot %}
+    <div class="chatbot-container">
+      {{ page.chatbot }}
+    </div>
+  {% endif %}
+
+  {# Footer #}
+  {% if page.footer %}
+    <footer class="footer" role="contentinfo">
+      {{ page.footer }}
+    </footer>
+  {% endif %}
+</div>

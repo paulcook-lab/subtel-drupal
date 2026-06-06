@@ -1,0 +1,125 @@
+{#
+/**
+ * Mega Menu Component - GOV.UK inspired
+ */
+#}
+<nav class="mega-menu" role="navigation" aria-label="Main menu">
+  <ul class="menu-groups">
+    {# Services & Information #}
+    <li class="menu-group">
+      <button class="group-toggle" aria-expanded="false">
+        {{ 'Servicios e Información'|t }}
+      </button>
+      <div class="group-submenu">
+        <ul class="menu-columns">
+          <li class="menu-column">
+            <h3>{{ 'Para Usuarios'|t }}</h3>
+            <ul>
+              <li><a href="/solicitudes">{{ 'Portal de Solicitudes'|t }}</a></li>
+              <li><a href="/reclamos">{{ 'Presentar Reclamo'|t }}</a></li>
+              <li><a href="/cobertura">{{ 'Mapa de Cobertura'|t }}</a></li>
+              <li><a href="/comparativa">{{ 'Comparativa Planes'|t }}</a></li>
+              <li><a href="/proteccion">{{ 'Protección del Consumidor'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Para Operadores'|t }}</h3>
+            <ul>
+              <li><a href="/espectro">{{ 'Gestión de Espectro'|t }}</a></li>
+              <li><a href="/regulaciones">{{ 'Normativas Técnicas'|t }}</a></li>
+              <li><a href="/solicitud-licencia">{{ 'Solicitud de Licencia'|t }}</a></li>
+              <li><a href="/reportes">{{ 'Reportes Operacionales'|t }}</a></li>
+              <li><a href="/cumplimiento">{{ 'Cumplimiento Regulatorio'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Información General'|t }}</h3>
+            <ul>
+              <li><a href="/faq">{{ 'Preguntas Frecuentes'|t }}</a></li>
+              <li><a href="/glosario">{{ 'Glosario Técnico'|t }}</a></li>
+              <li><a href="/descargas">{{ 'Centro de Descargas'|t }}</a></li>
+              <li><a href="/eventos">{{ 'Eventos y Webinars'|t }}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    {# About & Transparency #}
+    <li class="menu-group">
+      <button class="group-toggle" aria-expanded="false">
+        {{ 'Organización'|t }}
+      </button>
+      <div class="group-submenu">
+        <ul class="menu-columns">
+          <li class="menu-column">
+            <h3>{{ 'Conócenos'|t }}</h3>
+            <ul>
+              <li><a href="/quienes-somos">{{ '¿Quiénes Somos?'|t }}</a></li>
+              <li><a href="/misión-visión">{{ 'Misión y Visión'|t }}</a></li>
+              <li><a href="/autoridades">{{ 'Autoridades'|t }}</a></li>
+              <li><a href="/estructura">{{ 'Estructura Organizacional'|t }}</a></li>
+              <li><a href="/historia">{{ 'Historia'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Transparencia'|t }}</h3>
+            <ul>
+              <li><a href="/datos-abiertos">{{ 'Datos Abiertos'|t }}</a></li>
+              <li><a href="/informes">{{ 'Informes Públicos'|t }}</a></li>
+              <li><a href="/transparencia">{{ 'Solicitud de Transparencia'|t }}</a></li>
+              <li><a href="/presupuesto">{{ 'Presupuesto'|t }}</a></li>
+              <li><a href="/auditorias">{{ 'Auditorías'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Participación'|t }}</h3>
+            <ul>
+              <li><a href="/consultas">{{ 'Consultas Públicas'|t }}</a></li>
+              <li><a href="/consejos">{{ 'Consejos Consultivos'|t }}</a></li>
+              <li><a href="/feedback">{{ 'Valoración de Servicios'|t }}</a></li>
+              <li><a href="/contacto">{{ 'Contacto'|t }}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    {# Data & Studies #}
+    <li class="menu-group">
+      <button class="group-toggle" aria-expanded="false">
+        {{ 'Datos y Estudios'|t }}
+      </button>
+      <div class="group-submenu">
+        <ul class="menu-columns">
+          <li class="menu-column">
+            <h3>{{ 'Estadísticas'|t }}</h3>
+            <ul>
+              <li><a href="/estadisticas/telefonía">{{ 'Telefonía'|t }}</a></li>
+              <li><a href="/estadisticas/internet">{{ 'Internet'|t }}</a></li>
+              <li><a href="/estadisticas/television">{{ 'Televisión'|t }}</a></li>
+              <li><a href="/estadisticas/5g">{{ 'Tecnologías 5G+'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Estudios'|t }}</h3>
+            <ul>
+              <li><a href="/estudios/sociedad-digital">{{ 'Sociedad Digital'|t }}</a></li>
+              <li><a href="/estudios/mercado">{{ 'Análisis de Mercado'|t }}</a></li>
+              <li><a href="/estudios/infraestructura">{{ 'Infraestructura'|t }}</a></li>
+              <li><a href="/estudios/regulacion">{{ 'Regulación Comparada'|t }}</a></li>
+            </ul>
+          </li>
+          <li class="menu-column">
+            <h3>{{ 'Publicaciones'|t }}</h3>
+            <ul>
+              <li><a href="/publicaciones/noticias">{{ 'Noticias'|t }}</a></li>
+              <li><a href="/publicaciones/blog">{{ 'Blog'|t }}</a></li>
+              <li><a href="/publicaciones/boletín">{{ 'Boletín Mensual'|t }}</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>

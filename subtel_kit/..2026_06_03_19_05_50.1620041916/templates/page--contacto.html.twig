@@ -1,0 +1,142 @@
+{{ attach_library('subtel_kit/global') }}
+<a href="#main-content" class="subtel-skip">Saltar al contenido principal</a>
+<div class="subtel-portal">
+  <header class="subtel-header" role="banner">
+    <div class="subtel-govbar">
+      <span>Gobierno de Chile</span>
+      <span>Subsecretaria de Telecomunicaciones</span>
+    </div>
+    <div class="subtel-nav">
+      <a class="subtel-brand" href="/" aria-label="Inicio SUBTEL">
+        <span class="subtel-brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>SUBTEL</strong>
+          <small>Plataforma digital de solicitudes</small>
+        </span>
+      </a>
+      <nav aria-label="Navegacion principal">
+        <a href="/">Inicio</a>
+        <a href="/noticias">Noticias</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="subtel-contact-page">
+    <section class="subtel-band" aria-labelledby="contacto-title">
+      <div class="subtel-section-head">
+        <p class="subtel-eyebrow">Estamos aquí para ayudarte</p>
+        <h1 id="contacto-title">Contacto</h1>
+      </div>
+
+      <div class="subtel-case-layout">
+        <div class="subtel-case-panel">
+          <h2>Formas de contactarnos</h2>
+          <p>Selecciona el medio de contacto que mejor se ajuste a tus necesidades. Nuestro equipo está disponible para ayudarte.</p>
+
+          <div class="subtel-action-list">
+            <div class="subtel-contact-item">
+              <h3>📧 Correo electrónico</h3>
+              <p><a href="mailto:contacto@subtel.cl">contacto@subtel.cl</a></p>
+              <small>Responderemos en 24 horas hábiles</small>
+            </div>
+
+            <div class="subtel-contact-item">
+              <h3>📞 Teléfono</h3>
+              <p><a href="tel:+56223276000">+56 2 2327 6000</a></p>
+              <small>Lunes a viernes, 9:00 - 17:00</small>
+            </div>
+
+            <div class="subtel-contact-item">
+              <h3>🏢 Oficinas de atención</h3>
+              <p>Teatinos 950, piso 8<br/>Santiago, Región Metropolitana</p>
+              <small>Con previa cita</small>
+            </div>
+
+            <div class="subtel-contact-item">
+              <h3>💬 Chat en vivo</h3>
+              <p>Asistencia inmediata a través de nuestro chat integrado</p>
+              <small>Disponible en horario de atención</small>
+            </div>
+          </div>
+
+          {{ page.content }}
+        </div>
+
+        <aside class="subtel-status-panel" aria-label="Información de soporte">
+          <h2>Horarios de atención</h2>
+          <dl>
+            <div>
+              <dt>Lunes a Viernes</dt>
+              <dd>09:00 - 17:00</dd>
+            </div>
+            <div>
+              <dt>Sábado</dt>
+              <dd>Cerrado</dd>
+            </div>
+            <div>
+              <dt>Domingo</dt>
+              <dd>Cerrado</dd>
+            </div>
+            <div>
+              <dt>Feriados</dt>
+              <dd>Cerrado</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    {% if page.irco %}
+      <section class="subtel-band">
+        <div class="subtel-section-head">
+          <p class="subtel-eyebrow">Asistencia automática</p>
+          <h2>Usa nuestro asistente IRCO</h2>
+        </div>
+        {{ page.irco }}
+      </section>
+    {% endif %}
+  </main>
+
+  <footer class="subtel-footer">
+    <strong>SUBTEL</strong>
+    <span>Subsecretaría de Telecomunicaciones · Chile</span>
+  </footer>
+</div>
+
+<style>
+  .subtel-contact-item {
+    background: #f8f9fa;
+    border-left: 4px solid var(--subtel-accent);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .subtel-contact-item h3 {
+    color: var(--subtel-primary-dark);
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+
+  .subtel-contact-item p {
+    color: var(--subtel-text);
+    margin: 0 0 8px;
+  }
+
+  .subtel-contact-item a {
+    color: var(--subtel-accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .subtel-contact-item a:hover {
+    text-decoration: underline;
+  }
+
+  .subtel-contact-item small {
+    color: var(--subtel-muted);
+    display: block;
+  }
+</style>

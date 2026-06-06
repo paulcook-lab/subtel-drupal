@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo - Actualizaciones SUBTEL Drupal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      background: #f8f9fa;
+      color: #475156;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e3e7ec;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #081e3e;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #4f5b67;
+      font-size: 14px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 32px;
+      padding: 32px;
+      border: 1px solid #e3e7ec;
+    }
+
+    .section h2 {
+      color: #081e3e;
+      font-size: 24px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e94560;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #f8f9fa;
+      border: 1px solid #e3e7ec;
+      border-radius: 8px;
+      padding: 20px;
+      transition: box-shadow 150ms ease-out;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(15, 52, 96, 0.1);
+    }
+
+    .card h3 {
+      color: #081e3e;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #4f5b67;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #0f3460;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .badge.new {
+      background: #e94560;
+    }
+
+    .news-card {
+      background: white;
+      border: 1px solid #e3e7ec;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .news-image {
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #0f3460 0%, #081e3e 100%);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+    }
+
+    .news-content {
+      padding: 20px;
+    }
+
+    .news-date {
+      color: #e94560;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .news-title {
+      color: #081e3e;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 8px 0;
+    }
+
+    .news-excerpt {
+      color: #4f5b67;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .news-link {
+      color: #0f3460;
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .irco-box {
+      background: white;
+      border: 1px solid #e3e7ec;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .irco-header {
+      background: linear-gradient(135deg, #0f3460 0%, #081e3e 100%);
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .irco-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .irco-header h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .irco-badge {
+      background: #457b9d;
+      color: white;
+      margin-left: auto;
+      padding: 4px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .irco-container {
+      height: 300px;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4f5b67;
+      font-size: 14px;
+    }
+
+    .changes-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .changes-table th,
+    .changes-table td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #e3e7ec;
+    }
+
+    .changes-table th {
+      background: #f8f9fa;
+      color: #081e3e;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .changes-table td {
+      color: #475156;
+      font-size: 14px;
+    }
+
+    .status-done {
+      color: #419d78;
+      font-weight: 700;
+    }
+
+    .status-new {
+      color: #e94560;
+      font-weight: 700;
+    }
+
+    .code-block {
+      background: #2d3436;
+      color: #dfe6e9;
+      padding: 16px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    footer {
+      background: white;
+      border-top: 1px solid #e3e7ec;
+      padding: 24px;
+      margin-top: 40px;
+      text-align: center;
+      color: #4f5b67;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🚀 Actualización SUBTEL Drupal</h1>
+      <p>Análisis de subtel.cl + Integración de IRCO + Kit Digital Gobierno Chile</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Cambios CSS -->
+    <section class="section">
+      <h2>✅ CSS Actualizado</h2>
+      <p>Se actualizó la paleta de colores y tipografía según el sitio oficial de SUBTEL.</p>
+
+      <table class="changes-table">
+        <thead>
+          <tr>
+            <th>Elemento</th>
+            <th>Anterior</th>
+            <th>Nuevo</th>
+            <th>Fuente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tipografía Body</td>
+            <td>Source Sans 3</td>
+            <td><span class="status-done">Open Sans</span></td>
+            <td>subtel.cl</td>
+          </tr>
+          <tr>
+            <td>Color Texto Principal</td>
+            <td>#212529</td>
+            <td><span class="status-done">#475156</span></td>
+            <td>subtel.cl</td>
+          </tr>
+          <tr>
+            <td>Kit Digital Colors</td>
+            <td>—</td>
+            <td><span class="status-new">Agregados</span></td>
+            <td>Kit Digital Gov.cl</td>
+          </tr>
+          <tr>
+            <td>Estilos IRCO</td>
+            <td>—</td>
+            <td><span class="status-new">Nuevos</span></td>
+            <td>Diseño personalizado</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-block">:root {
+  --subtel-sans: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  --subtel-text: #475156;
+  --kit-success: #419d78;
+  --kit-warning: #ffa630;
+  --kit-danger: #e63946;
+  --kit-info: #457b9d;
+}</div>
+    </section>
+
+    <!-- Templates Nuevos -->
+    <section class="section">
+      <h2>📄 Templates Twig Creados</h2>
+      <p>4 nuevos templates para mejorar la experiencia del usuario y agregar funcionalidades.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="badge new">Nuevo</span>
+          <h3>block--irco-embed.html.twig</h3>
+          <p>Bloque reutilizable para integrar IRCO (Asistente IA) en cualquier página. Incluye header con gradiente y fallback a iframe.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge new">Nuevo</span>
+          <h3>page--news.html.twig</h3>
+          <p>Página de noticias y anuncios. Carrusel de tarjetas con imagen, fecha, título y enlace. Similar a subtel.cl.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge new">Nuevo</span>
+          <h3>page--servicios.html.twig</h3>
+          <p>Página con catálogo de servicios. Grid de 6 servicios principales con descripciones breves e integración de IRCO.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge new">Nuevo</span>
+          <h3>page--contacto.html.twig</h3>
+          <p>Página de contacto con 4 formas de comunicación, horarios de atención y asistente IRCO para soporte.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview Noticias -->
+    <section class="section">
+      <h2>📰 Vista Previa - Página de Noticias</h2>
+
+      <div class="grid-3">
+        <div class="news-card">
+          <div class="news-image">📢</div>
+          <div class="news-content">
+            <span class="news-date">06.06.2026</span>
+            <h3 class="news-title">Actualización de plataforma digital</h3>
+            <p class="news-excerpt">Nueva versión con mejoras en usabilidad y seguridad para ciudadanos y operadores.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-image">🤖</div>
+          <div class="news-content">
+            <span class="news-date">05.06.2026</span>
+            <h3 class="news-title">Disponible IRCO - Asistente IA</h3>
+            <p class="news-excerpt">Nuevo asistente de inteligencia artificial para consultas sobre trámites.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-image">🔧</div>
+          <div class="news-content">
+            <span class="news-date">04.06.2026</span>
+            <h3 class="news-title">Mantenimiento programado</h3>
+            <p class="news-excerpt">Se realizará mantenimiento en los servidores durante la madrugada del próximo sábado.</p>
+            <a href="#" class="news-link">Leer más →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IRCO Integración -->
+    <section class="section">
+      <h2>🤖 Integración IRCO - Asistente IA</h2>
+      <p>Bloque embebido en todas las páginas principales para soporte inteligente.</p>
+
+      <div class="irco-box">
+        <div class="irco-header">
+          <div class="irco-icon">🤖</div>
+          <h3>IRCO - Asistente Inteligente</h3>
+          <span class="irco-badge">Beta</span>
+        </div>
+        <div class="irco-container">
+          <span>iframe embebido: http://172.30.10.179:5173/</span>
+        </div>
+      </div>
+
+      <div class="code-block">{% if page.irco %}
+  &lt;section class="subtel-band"&gt;
+    {{ page.irco }}
+  &lt;/section&gt;
+{% endif %}</div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="section">
+      <h2>🎯 Vista Previa - Página de Servicios</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>📧 Consultas en línea</h3>
+          <p>Realiza consultas sobre trámites, concesiones y autorizaciones de telecomunicaciones. <small>Disponible 24/7</small></p>
+        </div>
+
+        <div class="card">
+          <h3>📍 Seguimiento de solicitudes</h3>
+          <p>Monitorea el estado de tus trámites en tiempo real desde tu panel personal. <small>Actualizaciones en vivo</small></p>
+        </div>
+
+        <div class="card">
+          <h3>🔔 Notificaciones automáticas</h3>
+          <p>Recibe alertas por email cuando hay cambios en tus expedientes. <small>Personalizables</small></p>
+        </div>
+
+        <div class="card">
+          <h3>📄 Descargas de documentos</h3>
+          <p>Obtén copias digitales certificadas de resoluciones. <small>Formato PDF</small></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section class="section">
+      <h2>✅ Checklist de Implementación</h2>
+
+      <table class="changes-table">
+        <tbody>
+          <tr>
+            <td style="width: 50%;"><strong>CSS actualizado con paleta de subtel.cl</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Kit Digital colors agregados</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Template IRCO creado y funcional</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Página de noticias implementada</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Página de servicios implementada</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Página de contacto implementada</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Accesibilidad según normas Kit Digital</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Responsividad verificada</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+          <tr>
+            <td><strong>Documentación completa</strong></td>
+            <td style="color: #419d78; font-weight: 700;">✓ HECHO</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Ubicación de archivos -->
+    <section class="section">
+      <h2>📁 Ubicación de Archivos</h2>
+      <p>Todos los archivos se encuentran en el repositorio local:</p>
+
+      <div class="code-block">
+/Users/pcook/Plataformanueva/subtel_kit/
+├── css/
+│   └── subtel-platform.css (ACTUALIZADO)
+├── templates/
+│   ├── page--front.html.twig (original)
+│   ├── block--irco-embed.html.twig (NUEVO)
+│   ├── page--news.html.twig (NUEVO)
+│   ├── page--servicios.html.twig (NUEVO)
+│   └── page--contacto.html.twig (NUEVO)
+└── ACTUALIZACIONES_DRUPAL.md (DOCUMENTACIÓN)
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p><strong>SUBTEL</strong> - Subsecretaría de Telecomunicaciones de Chile</p>
+      <p>Actualización completada el 6 de junio de 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

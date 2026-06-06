@@ -1,0 +1,100 @@
+{{ attach_library('subtel_kit/global') }}
+<a href="#main-content" class="subtel-skip">Saltar al contenido principal</a>
+<div class="subtel-portal">
+  <header class="subtel-header" role="banner">
+    <div class="subtel-govbar">
+      <span>Gobierno de Chile</span>
+      <span>Subsecretaria de Telecomunicaciones</span>
+    </div>
+    <div class="subtel-nav">
+      <a class="subtel-brand" href="/" aria-label="Inicio SUBTEL">
+        <span class="subtel-brand-mark" aria-hidden="true"></span>
+        <span>
+          <strong>SUBTEL</strong>
+          <small>Plataforma digital de solicitudes</small>
+        </span>
+      </a>
+      <nav aria-label="Navegacion principal">
+        <a href="/">Inicio</a>
+        <a href="/noticias">Noticias</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="subtel-services-page">
+    <section class="subtel-band" aria-labelledby="servicios-title">
+      <div class="subtel-section-head">
+        <p class="subtel-eyebrow">Portal integral</p>
+        <h1 id="servicios-title">Servicios SUBTEL</h1>
+      </div>
+
+      {% if page.content %}
+        <div class="subtel-services-content">
+          {{ page.content }}
+        </div>
+      {% else %}
+        <div class="subtel-service-grid">
+          <article class="subtel-service-card">
+            <h3>Consultas en línea</h3>
+            <p>Realiza consultas sobre trámites, concesiones y autorizaciones de telecomunicaciones.</p>
+            <small>Disponible 24/7</small>
+          </article>
+
+          <article class="subtel-service-card">
+            <h3>Seguimiento de solicitudes</h3>
+            <p>Monitorea el estado de tus trámites en tiempo real desde tu panel personal.</p>
+            <small>Actualizaciones en vivo</small>
+          </article>
+
+          <article class="subtel-service-card">
+            <h3>Notificaciones automáticas</h3>
+            <p>Recibe alertas por email cuando hay cambios en tus expedientes y documentos.</p>
+            <small>Personalizables</small>
+          </article>
+
+          <article class="subtel-service-card">
+            <h3>Descargas de documentos</h3>
+            <p>Obtén copias digitales certificadas de resoluciones y documentos de tus trámites.</p>
+            <small>Formato PDF</small>
+          </article>
+
+          <article class="subtel-service-card">
+            <h3>Atención ciudadana</h3>
+            <p>Contacta con nuestro equipo de soporte para resolver dudas y problemas técnicos.</p>
+            <small>Equipo disponible</small>
+          </article>
+
+          <article class="subtel-service-card">
+            <h3>Capacitación y tutoriales</h3>
+            <p>Accede a guías, videos tutoriales y capacitaciones sobre el uso de la plataforma.</p>
+            <small>Recursos gratuitos</small>
+          </article>
+        </div>
+      {% endif %}
+    </section>
+
+    {% if page.irco %}
+      <section class="subtel-band">
+        <div class="subtel-section-head">
+          <p class="subtel-eyebrow">Soporte inteligente</p>
+          <h2>¿Necesitas ayuda?</h2>
+        </div>
+        {{ page.irco }}
+      </section>
+    {% endif %}
+
+    <section class="subtel-status-strip" id="contacto-rapido" aria-label="Contacto rápido">
+      <a href="mailto:contacto@subtel.cl">contacto@subtel.cl</a>
+      <a href="tel:+56223276000">+56 2 2327 6000</a>
+      <a href="/oficinas">Oficinas de atención</a>
+      <a href="/horarios">Horarios de atención</a>
+    </section>
+  </main>
+
+  <footer class="subtel-footer">
+    <strong>SUBTEL</strong>
+    <span>Subsecretaría de Telecomunicaciones · Chile</span>
+  </footer>
+</div>
