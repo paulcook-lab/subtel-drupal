@@ -2,6 +2,7 @@ name: SUBTEL Mejorado
 type: theme
 description: 'Tema Drupal 10 - SUBTEL modernizado con KIT Digital Chile'
 core_version_requirement: ^10
+base theme: false
 
 # Regiones
 regions:
