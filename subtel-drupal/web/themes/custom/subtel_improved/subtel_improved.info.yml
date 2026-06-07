@@ -1,7 +1,6 @@
 name: SUBTEL Mejorado
 type: theme
 description: 'Tema Drupal 10 - SUBTEL modernizado con KIT Digital Chile'
-base theme: classy
 core_version_requirement: ^10
 
 # Regiones
@@ -21,31 +20,13 @@ libraries:
     css:
       base:
         css/base.css: {}
-      component:
-        css/components.css: {}
         css/typography.css: {}
+        css/components.css: {}
         css/layout.css: {}
         css/responsive.css: {}
-    js:
-      js/main.js: {}
-  hero:
-    css:
-      component:
         css/hero-carousel.css: {}
     js:
-      js/hero-carousel.js: {}
-  menu:
-    css:
-      component:
-        css/mega-menu.css: {}
-    js:
-      js/mega-menu.js: {}
-  accessibility:
-    css:
-      component:
-        css/accessibility.css: {}
-    js:
-      js/accessibility-controls.js: {}
+      js/main.js: {}
 
 # Breakpoints
 breakpoints:
